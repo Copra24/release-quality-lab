@@ -183,7 +183,7 @@ async function run() {
             if (scenario === 'checkout-review-diagnostic') {
               const paymentData = [
                 ['nameET', 'Clifford Folefac'],
-                ['cardNumberET', '4242424242424242'],
+                ['cardNumberET', '4242 4242 4242 4242'],
                 ['expirationDateET', '12/30'],
                 ['securityCodeET', '123']
               ];
@@ -202,6 +202,16 @@ async function run() {
               await driver.pause(500);
               const reviewSource = await driver.getPageSource();
               if (reviewSource.includes('Enter a payment method')) {
+                const errorMessages = await Promise.all([
+                  'nameErrorTV',
+                  'cardNumberErrorTV',
+                  'expirationDateErrorTV',
+                  'securityCodeErrorTV'
+                ].map(async (errorId) => {
+                  const error = await driver.$(`id=com.saucelabs.mydemoapp.android:id/${errorId}`);
+                  return (await error.isExisting()) ? await error.getText() : '';
+                }));
+                console.log(`Payment validation feedback: ${errorMessages.filter(Boolean).join(' | ') || 'none exposed'}`);
                 throw new Error('Payment submission did not advance to order review.');
               }
               writeFileSync('artifacts/android-order-review-page-source.xml', reviewSource);
