@@ -43,7 +43,9 @@ async function run() {
       ? {
           'sauce:options': {
             name: 'Android smoke check',
-            build: process.env.GITHUB_RUN_ID ? `release-quality-lab-${process.env.GITHUB_RUN_ID}` : 'release-quality-lab-local'
+            build: process.env.GITHUB_RUN_ID ? `release-quality-lab-${process.env.GITHUB_RUN_ID}` : 'release-quality-lab-local',
+            // Android 14+ sessions on Sauce require W3C/Appium 2.
+            appiumVersion: '2.11.0'
           }
         }
       : {})
