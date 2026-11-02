@@ -9,6 +9,11 @@ on:
         default: us-west-1
         type: choice
         options: [us-west-1, eu-central-1]
+      capture_page_source:
+        description: Save the launch-screen Android page source as a workflow artifact for locator design
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   android-smoke:
@@ -28,6 +33,7 @@ jobs:
       SMOKE_EXPECTED_TEXT: Sauce Labs Backpack
       ANDROID_DEVICE_NAME: ${{ vars.ANDROID_DEVICE_NAME || 'Samsung Galaxy S23 FE' }}
       ANDROID_PLATFORM_VERSION: ${{ vars.ANDROID_PLATFORM_VERSION || '16' }}
+      MOBILE_CAPTURE_PAGE_SOURCE: ${{ inputs.capture_page_source }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -36,3 +42,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:android
+      - uses: actions/upload-artifact@v4
+        if: ${{ inputs.capture_page_source }}
+        with:
+          name: android-page-source
+          path: artifacts/android-page-source.xml
+          retention-days: 14

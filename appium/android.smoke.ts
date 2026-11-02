@@ -1,4 +1,5 @@
 import { remote } from 'webdriverio';
+import { mkdirSync, writeFileSync } from 'node:fs';
 
 /**
  * Configurable Android smoke check.
@@ -61,6 +62,12 @@ async function run() {
     const source = await driver.getPageSource();
     if (!source.includes(expectedText)) {
       throw new Error(`App launched but expected text was not found: ${expectedText}`);
+    }
+
+    if (process.env.MOBILE_CAPTURE_PAGE_SOURCE === 'true') {
+      mkdirSync('artifacts', { recursive: true });
+      writeFileSync('artifacts/android-page-source.xml', source);
+      console.log('Saved Android page source to artifacts/android-page-source.xml for locator design.');
     }
 
     if (process.env.SMOKE_ACCESSIBILITY_ID) {
