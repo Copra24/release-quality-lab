@@ -92,7 +92,7 @@ The [latest recorded Quality Checks execution](docs/execution-evidence/2026-11-0
 
 ## Android Appium module
 
-The Appium module was executed successfully on a Sauce Labs Samsung Galaxy S23 FE running Android 16. It includes a launch smoke check and a native cart journey that adds `Sauce Labs Backpack`, opens `My Cart`, and verifies the cart state through stable resource IDs and accessibility labels. See the [launch evidence](docs/execution-evidence/2026-11-02-sauce-labs-android-smoke.md) and [cart-journey evidence](docs/execution-evidence/2026-11-02-android-cart-journey.md). Setup instructions are in [`appium/README.md`](appium/README.md).
+The Appium module was executed successfully on a Sauce Labs Samsung Galaxy S23 FE running Android 16. It includes a launch smoke check, a native cart journey, and an authenticated checkout journey through order review. These scenarios use stable resource IDs and accessibility labels, controlled test data, and GitHub Actions artifacts. See the [launch evidence](docs/execution-evidence/2026-11-02-sauce-labs-android-smoke.md), [cart-journey evidence](docs/execution-evidence/2026-11-02-android-cart-journey.md), and [checkout-journey evidence](docs/execution-evidence/2026-11-02-android-checkout-journey.md). Setup instructions are in [`appium/README.md`](appium/README.md).
 
 For a cloud-device run without Android Studio, see [`docs/sauce-labs-setup.md`](docs/sauce-labs-setup.md). The Sauce workflow is manual and uses GitHub secrets, so credentials are not committed or exposed in CI logs.
 
