@@ -22,9 +22,10 @@ jobs:
       SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
       SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
       SAUCE_APP: ${{ secrets.SAUCE_APP }}
-      ANDROID_APP_PACKAGE: ${{ secrets.ANDROID_APP_PACKAGE }}
-      ANDROID_APP_ACTIVITY: ${{ secrets.ANDROID_APP_ACTIVITY }}
-      SMOKE_ACCESSIBILITY_ID: ${{ secrets.SMOKE_ACCESSIBILITY_ID }}
+      ANDROID_APP_PACKAGE: ${{ vars.ANDROID_APP_PACKAGE }}
+      ANDROID_APP_ACTIVITY: ${{ vars.ANDROID_APP_ACTIVITY }}
+      SMOKE_ACCESSIBILITY_ID: ${{ vars.SMOKE_ACCESSIBILITY_ID }}
+      SMOKE_EXPECTED_TEXT: Sauce Labs Backpack
       ANDROID_DEVICE_NAME: ${{ vars.ANDROID_DEVICE_NAME || 'Google Pixel 8 GoogleAPI Emulator' }}
     steps:
       - uses: actions/checkout@v4

@@ -7,8 +7,8 @@ This optional workflow runs the existing Appium smoke check in Sauce Labs withou
 In Sauce Labs, upload an APK that you are permitted to test. A demo app is appropriate for this portfolio. Record:
 
 - The Sauce app reference, commonly `storage:filename=your-demo.apk`
-- The Android package and launch activity
-- A stable accessibility identifier for a visible control, such as the app home screen
+- The Android package and launch activity, if you need to force a specific entry point
+- An optional stable accessibility identifier for additional element-level checks
 
 ## 2. Add repository secrets
 
@@ -18,17 +18,14 @@ In GitHub: **Settings -> Secrets and variables -> Actions**, add these repositor
 | --- | --- |
 | `SAUCE_USERNAME` | Your Sauce Labs username |
 | `SAUCE_ACCESS_KEY` | Your Sauce Labs access key |
-| `SAUCE_APP` | The Sauce app reference |
-| `ANDROID_APP_PACKAGE` | Target package name |
-| `ANDROID_APP_ACTIVITY` | Target launch activity |
-| `SMOKE_ACCESSIBILITY_ID` | Accessibility identifier used by the smoke check |
+| `SAUCE_APP` | The Sauce app reference, for example `storage:filename=mda-2.3.0-27.apk` |
 
 Do not commit these values or paste the access key into chat.
 
-Optionally set the GitHub repository variable `ANDROID_DEVICE_NAME`. The workflow defaults to `Google Pixel 8 GoogleAPI Emulator`.
+Optionally set repository variables `ANDROID_APP_PACKAGE`, `ANDROID_APP_ACTIVITY`, `SMOKE_ACCESSIBILITY_ID`, and `ANDROID_DEVICE_NAME`. The workflow defaults to `Google Pixel 8 GoogleAPI Emulator`.
 
 ## 3. Run it
 
 Open **Actions -> Sauce Labs Android Smoke -> Run workflow**, select the Sauce region used when your account was created, and run it.
 
-The result creates an Appium session in Sauce Labs. Keep the run URL, device details, screenshots, and video as evidence. Only change the README or CV to say the Appium module is executed after this run passes.
+The smoke check validates that `Sauce Labs Backpack` is visible after launch. If you set `SMOKE_ACCESSIBILITY_ID`, it also verifies that specific control. Keep the run URL, device details, screenshots, and video as evidence. Only change the README or CV to say the Appium module is executed after this run passes.
