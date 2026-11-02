@@ -1,4 +1,4 @@
-# QA Portfolio - Release Taskboard
+# Release Quality Engineering Lab
 
 An independent QA engineering portfolio project by Clifford Folefac. It demonstrates a practical quality approach across UI, API, test data, CI, and Android automation setup. This is portfolio work, not client or employer work.
 

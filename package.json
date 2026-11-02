@@ -1,5 +1,5 @@
 {
-  "name": "qa-portfolio",
+  "name": "release-quality-lab",
   "version": "1.0.0",
   "private": true,
   "description": "Independent QA portfolio: Playwright UI/API tests, OpenAPI, Postman, SQL test data, and Appium Android smoke coverage.",
