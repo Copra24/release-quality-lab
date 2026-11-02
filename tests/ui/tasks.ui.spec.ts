@@ -1,16 +1,17 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Release taskboard', () => {
-  test('adds and completes a task through the user interface', async ({ page }) => {
+  test('adds and completes a task through the user interface', async ({ page }, testInfo) => {
+    const taskTitle = `Run mobile smoke suite ${testInfo.project.name}-${testInfo.parallelIndex}`;
     await page.goto('/');
     await expect(page.getByRole('heading', { name: 'Release Taskboard' })).toBeVisible();
 
-    await page.getByTestId('new-task-input').fill('Run mobile smoke suite');
+    await page.getByTestId('new-task-input').fill(taskTitle);
     await page.getByRole('button', { name: 'Add task' }).click();
 
-    const task = page.locator('li[data-testid^="task-"]').filter({ hasText: 'Run mobile smoke suite' });
+    const task = page.locator('li[data-testid^="task-"]').filter({ hasText: taskTitle });
     await expect(task).toBeVisible();
-    await task.getByRole('checkbox', { name: 'Mark Run mobile smoke suite complete' }).check();
+    await task.getByRole('checkbox', { name: `Mark ${taskTitle} complete` }).check();
     await expect(task.locator('span')).toHaveClass('completed');
   });
 
