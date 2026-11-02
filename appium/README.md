@@ -21,3 +21,7 @@ The smoke check starts the app and confirms that the specified accessibility-lab
 ## Designing stable mobile locators
 
 For a cloud-device diagnostic run, set **capture page source** to `true` when manually triggering the Sauce Labs workflow. The run stores `android-page-source.xml` as a 14-day GitHub Actions artifact. Set **diagnostic open first product** to `true` as well to capture `android-product-detail-page-source.xml`. Use these artifacts to identify stable Android resource IDs or accessibility labels before adding a native user journey. Do not guess selectors from visual button text when a stable identifier is available.
+
+## Native cart scenario
+
+Set the workflow **scenario** to `cart` to execute a real Android journey: open the first catalog product, add it to the cart using the `Tap to add product to cart` accessibility label, open the cart with `View cart`, and verify the product remains present outside the detail-page state. When page-source capture is enabled, the cart source is saved as an artifact too.

@@ -19,6 +19,12 @@ on:
         required: true
         default: false
         type: boolean
+      scenario:
+        description: Android test flow to run
+        required: true
+        default: launch
+        type: choice
+        options: [launch, cart]
 
 jobs:
   android-smoke:
@@ -40,6 +46,7 @@ jobs:
       ANDROID_PLATFORM_VERSION: ${{ vars.ANDROID_PLATFORM_VERSION || '16' }}
       MOBILE_CAPTURE_PAGE_SOURCE: ${{ inputs.capture_page_source }}
       MOBILE_DIAGNOSTIC_OPEN_FIRST_PRODUCT: ${{ inputs.diagnostic_open_first_product }}
+      MOBILE_TEST_SCENARIO: ${{ inputs.scenario }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

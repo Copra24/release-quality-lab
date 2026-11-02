@@ -8,6 +8,10 @@ import { mkdirSync, writeFileSync } from 'node:fs';
  */
 async function run() {
   const isSauce = process.env.MOBILE_GRID === 'sauce';
+  const scenario = process.env.MOBILE_TEST_SCENARIO ?? 'launch';
+  if (!['launch', 'cart'].includes(scenario)) {
+    throw new Error(`Unsupported MOBILE_TEST_SCENARIO: ${scenario}`);
+  }
   const required = [
     ...(isSauce ? ['SAUCE_USERNAME', 'SAUCE_ACCESS_KEY', 'SAUCE_APP'] : [])
   ];
@@ -43,7 +47,7 @@ async function run() {
     ...(isSauce
       ? {
           'sauce:options': {
-            name: 'Android smoke check',
+            name: `Android ${scenario} check`,
             build: process.env.GITHUB_RUN_ID ? `release-quality-lab-${process.env.GITHUB_RUN_ID}` : 'release-quality-lab-local',
             // Android 14+ sessions on Sauce require W3C/Appium 2.
             appiumVersion: 'appium2-2025-09'
@@ -81,6 +85,34 @@ async function run() {
       mkdirSync('artifacts', { recursive: true });
       writeFileSync('artifacts/android-product-detail-page-source.xml', detailSource);
       console.log('Saved product detail page source to artifacts/android-product-detail-page-source.xml for locator design.');
+    }
+
+    if (scenario === 'cart') {
+      const products = await driver.$$('~Product Image');
+      if (!products.length) {
+        throw new Error('Cart scenario cannot start because no Product Image locator was found.');
+      }
+
+      await products[0].click();
+      const addToCart = await driver.$('~Tap to add product to cart');
+      await addToCart.waitForDisplayed({ timeout: 10_000 });
+      await addToCart.click();
+
+      const viewCart = await driver.$('~View cart');
+      await viewCart.waitForDisplayed({ timeout: 10_000 });
+      await viewCart.click();
+      await driver.pause(500);
+
+      const cartSource = await driver.getPageSource();
+      if (!cartSource.includes('Sauce Labs Backpack') || cartSource.includes('Tap to add product to cart')) {
+        throw new Error('Cart scenario did not show the added product in a cart state.');
+      }
+
+      if (process.env.MOBILE_CAPTURE_PAGE_SOURCE === 'true') {
+        mkdirSync('artifacts', { recursive: true });
+        writeFileSync('artifacts/android-cart-page-source.xml', cartSource);
+      }
+      console.log('Android cart scenario passed: product added and cart state verified.');
     }
 
     if (process.env.SMOKE_ACCESSIBILITY_ID) {
