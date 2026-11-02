@@ -75,6 +75,13 @@ The CI workflow runs `npm audit --omit=dev` to check runtime dependencies. The d
 
 See [`docs/bug-reports/BUG-001-empty-task-feedback.md`](docs/bug-reports/BUG-001-empty-task-feedback.md) for an example of a clear, reproducible defect report.
 
+## Test planning and release evidence
+
+- [Risk-based test strategy](docs/test-strategy.md)
+- [Release-quality report template](docs/release-quality-report-template.md)
+
+These artifacts show the decisions that sit around automated checks: risk selection, test-level ownership, entry and exit criteria, remaining-risk communication, and a documented GO/NO-GO outcome.
+
 ## Android Appium module
 
 The Appium module was executed successfully on a Sauce Labs Samsung Galaxy S23 FE running Android 16. The smoke check launched the My Demo App and verified that `Sauce Labs Backpack` was visible. See the sanitized [execution evidence](docs/execution-evidence/2026-11-02-sauce-labs-android-smoke.md). Setup instructions are in [`appium/README.md`](appium/README.md).

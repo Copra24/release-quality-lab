@@ -13,6 +13,7 @@ This matrix makes the portfolio easy for a recruiter or hiring manager to inspec
 | Postman API checks | `postman/Taskboard.postman_collection.json` | Implemented |
 | SQL test data | `sql/test-data.sql` | Implemented |
 | Defect reporting | `docs/bug-reports/BUG-001-empty-task-feedback.md` | Implemented example |
+| Test planning and release readiness | `docs/test-strategy.md` and `docs/release-quality-report-template.md` | Implemented templates with risk, traceability, entry/exit, and GO/NO-GO criteria |
 | AI-assisted QA | README review-gated test generation and locator-remediation workflow | Implemented process documentation |
 | Appium Android automation | `appium/android.smoke.ts` and [Sauce Labs execution evidence](execution-evidence/2026-11-02-sauce-labs-android-smoke.md) | Executed successfully on a Sauce Labs Samsung Galaxy S23 FE running Android 16 |
 
