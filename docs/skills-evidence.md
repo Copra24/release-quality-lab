@@ -5,6 +5,7 @@ This matrix makes the portfolio easy for a recruiter or hiring manager to inspec
 | Capability | Evidence | Status |
 | --- | --- | --- |
 | Playwright + TypeScript UI automation | `tests/ui/tasks.ui.spec.ts` | Implemented; run after dependencies are installed |
+| Cross-browser web testing | Chromium, Firefox, and WebKit projects in `playwright.config.ts` with [execution evidence](execution-evidence/2026-11-02-cross-browser-quality-checks.md) | Executed successfully for UI and accessibility coverage |
 | Mobile web QA | `tests/mobile/tasks.mobile.spec.ts` using Playwright Pixel 5 emulation and touch interaction | Implemented; CI-run once pushed |
 | Playwright API testing | `tests/api/tasks.api.spec.ts` | Implemented; run after dependencies are installed |
 | Test framework configuration | `playwright.config.ts` with retries, traces, screenshots, video, HTML report, and local web server | Implemented |

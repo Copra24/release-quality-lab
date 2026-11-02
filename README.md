@@ -28,7 +28,7 @@ The sample system is a release taskboard with a small web UI and REST API. Cover
 3. **Test data** remains independent of production data. `sql/test-data.sql` documents a repeatable fixture and data assertion.
 4. **Mobile** is kept as a separate smoke layer because it needs a real emulator or device to be meaningful.
 
-The repository runs UI and accessibility coverage on Chromium, Firefox, and WebKit. API checks run on Chromium because they exercise the service directly rather than browser rendering. It also runs a mobile-Chrome emulation project using Playwright's Pixel 5 device profile. This is browser-responsive and touch-interaction coverage. It is not presented as native Android or Appium execution.
+The repository runs UI and accessibility coverage successfully on Chromium, Firefox, and WebKit. API checks run on Chromium because they exercise the service directly rather than browser rendering. It also runs a mobile-Chrome emulation project using Playwright's Pixel 5 device profile. This is browser-responsive and touch-interaction coverage. It is not presented as native Android or Appium execution. See the [cross-browser execution evidence](docs/execution-evidence/2026-11-02-cross-browser-quality-checks.md).
 
 ## Run locally
 
