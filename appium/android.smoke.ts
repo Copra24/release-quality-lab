@@ -193,7 +193,10 @@ async function run() {
                 await field.setValue(value);
               }
               const billingAddress = await driver.$('~Select if User billing address and shipping address are same');
-              if (!(await billingAddress.isSelected())) {
+              // Android exposes a CheckBox's state through `checked`, not its
+              // generic selection state. Using isSelected() left this required
+              // checkout option off while the entered payment details were valid.
+              if ((await billingAddress.getAttribute('checked')) !== 'true') {
                 await billingAddress.click();
               }
               const reviewOrder = await driver.$('~Saves payment info and launches screen to review checkout data');
