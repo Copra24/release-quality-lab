@@ -9,7 +9,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 async function run() {
   const isSauce = process.env.MOBILE_GRID === 'sauce';
   const scenario = process.env.MOBILE_TEST_SCENARIO ?? 'launch';
-  if (!['launch', 'cart', 'checkout-diagnostic', 'checkout-login-diagnostic', 'checkout-payment-diagnostic'].includes(scenario)) {
+  if (!['launch', 'cart', 'checkout-diagnostic', 'checkout-login-diagnostic', 'checkout-payment-diagnostic', 'checkout-shipping-diagnostic'].includes(scenario)) {
     throw new Error(`Unsupported MOBILE_TEST_SCENARIO: ${scenario}`);
   }
   const required = [
@@ -87,7 +87,7 @@ async function run() {
       console.log('Saved product detail page source to artifacts/android-product-detail-page-source.xml for locator design.');
     }
 
-    if (['cart', 'checkout-diagnostic', 'checkout-login-diagnostic', 'checkout-payment-diagnostic'].includes(scenario)) {
+    if (['cart', 'checkout-diagnostic', 'checkout-login-diagnostic', 'checkout-payment-diagnostic', 'checkout-shipping-diagnostic'].includes(scenario)) {
       const firstProduct = await driver.$('~Product Image');
       if (await firstProduct.isExisting()) {
         await firstProduct.click();
@@ -125,7 +125,7 @@ async function run() {
       }
       console.log('Android cart scenario passed: product added and cart state verified.');
 
-      if (['checkout-diagnostic', 'checkout-login-diagnostic', 'checkout-payment-diagnostic'].includes(scenario)) {
+      if (['checkout-diagnostic', 'checkout-login-diagnostic', 'checkout-payment-diagnostic', 'checkout-shipping-diagnostic'].includes(scenario)) {
         const proceedToCheckout = await driver.$('~Confirms products for checkout');
         await proceedToCheckout.waitForDisplayed({ timeout: 10_000 });
         await proceedToCheckout.click();
@@ -135,7 +135,7 @@ async function run() {
         writeFileSync('artifacts/android-checkout-page-source.xml', checkoutSource);
         console.log('Saved checkout page source to artifacts/android-checkout-page-source.xml for locator design.');
 
-        if (['checkout-login-diagnostic', 'checkout-payment-diagnostic'].includes(scenario)) {
+        if (['checkout-login-diagnostic', 'checkout-payment-diagnostic', 'checkout-shipping-diagnostic'].includes(scenario)) {
           const demoUser = await driver.$('id=com.saucelabs.mydemoapp.android:id/username1TV');
           const login = await driver.$('~Tap to login with given credentials');
           await demoUser.waitForDisplayed({ timeout: 10_000 });
@@ -147,7 +147,7 @@ async function run() {
           writeFileSync('artifacts/android-checkout-after-login-page-source.xml', afterLoginSource);
           console.log('Saved post-login checkout page source to artifacts/android-checkout-after-login-page-source.xml for locator design.');
 
-          if (scenario === 'checkout-payment-diagnostic') {
+          if (['checkout-payment-diagnostic', 'checkout-shipping-diagnostic'].includes(scenario)) {
             const checkoutTitle = await driver.$('id=com.saucelabs.mydemoapp.android:id/checkoutTitleTV');
             const fullName = await driver.$('id=com.saucelabs.mydemoapp.android:id/fullNameET');
             const toPayment = await driver.$('~Saves user info for checkout');
@@ -157,9 +157,26 @@ async function run() {
             if (await checkoutTitle.getText() !== 'Checkout') {
               throw new Error('Expected the shipping-address checkout screen before advancing to payment.');
             }
+            if (scenario === 'checkout-shipping-diagnostic') {
+              const shippingData = [
+                ['fullNameET', 'Clifford Folefac'],
+                ['address1ET', '42 Quality Street'],
+                ['cityET', 'Douala'],
+                ['zipET', '00000'],
+                ['countryET', 'Cameroon']
+              ];
+              for (const [fieldId, value] of shippingData) {
+                const field = await driver.$(`id=com.saucelabs.mydemoapp.android:id/${fieldId}`);
+                await field.clearValue();
+                await field.setValue(value);
+              }
+            }
             await toPayment.click();
             await driver.pause(500);
             const paymentSource = await driver.getPageSource();
+            if (scenario === 'checkout-shipping-diagnostic' && paymentSource.includes('Enter a shipping address')) {
+              throw new Error('Shipping-address submission did not advance to payment.');
+            }
             writeFileSync('artifacts/android-payment-page-source.xml', paymentSource);
             console.log('Saved payment page source to artifacts/android-payment-page-source.xml for locator design.');
           }

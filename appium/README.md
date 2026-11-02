@@ -33,3 +33,5 @@ Set **scenario** to `checkout-diagnostic` with page-source capture enabled to ru
 Set **scenario** to `checkout-login-diagnostic` to continue from checkout through the public demo-account login. It uses the confirmed `username1TV` resource ID to auto-fill the demo credentials, submits via `Tap to login with given credentials`, and saves `android-checkout-after-login-page-source.xml` for the next checkout screen.
 
 Set **scenario** to `checkout-payment-diagnostic` to validate the shipping-address form and advance through the `Saves user info for checkout` control. It captures `android-payment-page-source.xml` before any payment fields or final-order steps are automated.
+
+Set **scenario** to `checkout-shipping-diagnostic` to actively replace every required shipping field with controlled test data before submitting. This distinguishes visible prefilled values from a valid form state and captures the real payment screen only after the shipping step advances.
