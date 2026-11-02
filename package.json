@@ -9,6 +9,7 @@
     "test:ui": "playwright test tests/ui",
     "test:api": "playwright test tests/api",
     "test:a11y": "playwright test tests/accessibility --project=chromium",
+    "test:performance": "node scripts/performance-smoke.js",
     "test:report": "playwright show-report",
     "test:android": "tsx appium/android.smoke.ts",
     "validate:assets": "node scripts/validate-assets.js",

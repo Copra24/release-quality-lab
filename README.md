@@ -15,6 +15,7 @@ An independent QA engineering portfolio project by Clifford Folefac. It demonstr
 | CI | GitHub Actions workflow running the Playwright suite on every pull request |
 | Mobile automation | Appium + UiAutomator2 Android smoke test executed on Sauce Labs |
 | Accessibility | Automated WCAG A/AA scan and keyboard-first release-task journey |
+| Performance | API performance smoke with concurrent requests, p95 threshold, and CI artifact |
 | AI-assisted QA | Documented, review-gated workflow for accelerating test drafting and maintenance |
 
 ## Test strategy
@@ -81,6 +82,10 @@ See [`docs/bug-reports/BUG-001-empty-task-feedback.md`](docs/bug-reports/BUG-001
 - [Release-quality report template](docs/release-quality-report-template.md)
 
 These artifacts show the decisions that sit around automated checks: risk selection, test-level ownership, entry and exit criteria, remaining-risk communication, and a documented GO/NO-GO outcome.
+
+## Performance smoke
+
+The API performance smoke sends a small concurrent workload to `POST /api/tasks`, requires successful `201` responses, and enforces a p95 latency threshold. It publishes a JSON summary as a GitHub Actions artifact. Read the [scope and limitations](docs/performance-baseline.md) before interpreting it as a production performance result.
 
 ## Android Appium module
 
