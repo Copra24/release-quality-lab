@@ -9,7 +9,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 async function run() {
   const isSauce = process.env.MOBILE_GRID === 'sauce';
   const scenario = process.env.MOBILE_TEST_SCENARIO ?? 'launch';
-  if (!['launch', 'cart', 'checkout-diagnostic'].includes(scenario)) {
+  if (!['launch', 'cart', 'checkout-diagnostic', 'checkout-login-diagnostic'].includes(scenario)) {
     throw new Error(`Unsupported MOBILE_TEST_SCENARIO: ${scenario}`);
   }
   const required = [
@@ -87,7 +87,7 @@ async function run() {
       console.log('Saved product detail page source to artifacts/android-product-detail-page-source.xml for locator design.');
     }
 
-    if (['cart', 'checkout-diagnostic'].includes(scenario)) {
+    if (['cart', 'checkout-diagnostic', 'checkout-login-diagnostic'].includes(scenario)) {
       const firstProduct = await driver.$('~Product Image');
       if (await firstProduct.isExisting()) {
         await firstProduct.click();
@@ -125,7 +125,7 @@ async function run() {
       }
       console.log('Android cart scenario passed: product added and cart state verified.');
 
-      if (scenario === 'checkout-diagnostic') {
+      if (['checkout-diagnostic', 'checkout-login-diagnostic'].includes(scenario)) {
         const proceedToCheckout = await driver.$('~Confirms products for checkout');
         await proceedToCheckout.waitForDisplayed({ timeout: 10_000 });
         await proceedToCheckout.click();
@@ -134,6 +134,19 @@ async function run() {
         mkdirSync('artifacts', { recursive: true });
         writeFileSync('artifacts/android-checkout-page-source.xml', checkoutSource);
         console.log('Saved checkout page source to artifacts/android-checkout-page-source.xml for locator design.');
+
+        if (scenario === 'checkout-login-diagnostic') {
+          const demoUser = await driver.$('id=com.saucelabs.mydemoapp.android:id/username1TV');
+          const login = await driver.$('~Tap to login with given credentials');
+          await demoUser.waitForDisplayed({ timeout: 10_000 });
+          await demoUser.click();
+          await login.waitForDisplayed({ timeout: 10_000 });
+          await login.click();
+          await driver.pause(500);
+          const afterLoginSource = await driver.getPageSource();
+          writeFileSync('artifacts/android-checkout-after-login-page-source.xml', afterLoginSource);
+          console.log('Saved post-login checkout page source to artifacts/android-checkout-after-login-page-source.xml for locator design.');
+        }
       }
     }
 
