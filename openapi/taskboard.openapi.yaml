@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Release Taskboard API
+  version: 1.0.0
+  description: Independent portfolio API used to demonstrate functional and API quality coverage.
+paths:
+  /api/tasks:
+    get:
+      summary: List tasks
+      responses:
+        '200':
+          description: Task list
+    post:
+      summary: Create a task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+      responses:
+        '201': { description: Created }
+        '400': { description: Invalid payload }
+  /api/tasks/{id}:
+    patch:
+      summary: Update task completion state
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200': { description: Updated }
+        '404': { description: Not found }
+    delete:
+      summary: Delete a task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '204': { description: Deleted }
