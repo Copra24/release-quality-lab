@@ -58,6 +58,10 @@ AI is used as an accelerator, not an authority:
 
 This provides a defensible explanation of AI-assisted test generation and maintenance without claiming unattended or autonomous quality decisions.
 
+## Dependency security
+
+The CI workflow runs `npm audit --omit=dev` to check runtime dependencies. The demo application has no known runtime dependency vulnerabilities. Development-tool findings are reviewed separately rather than fixed with breaking changes by default.
+
 ## Sample bug report
 
 See [`docs/bug-reports/BUG-001-empty-task-feedback.md`](docs/bug-reports/BUG-001-empty-task-feedback.md) for an example of a clear, reproducible defect report.
