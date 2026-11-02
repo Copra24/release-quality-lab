@@ -31,3 +31,5 @@ Set the workflow **scenario** to `cart` to execute a real Android journey: open 
 Set **scenario** to `checkout-diagnostic` with page-source capture enabled to run the proven cart journey, open checkout using the `Confirms products for checkout` accessibility label, and save `android-checkout-page-source.xml`. Inspect that source before automating customer-details, payment, review, or order-confirmation steps.
 
 Set **scenario** to `checkout-login-diagnostic` to continue from checkout through the public demo-account login. It uses the confirmed `username1TV` resource ID to auto-fill the demo credentials, submits via `Tap to login with given credentials`, and saves `android-checkout-after-login-page-source.xml` for the next checkout screen.
+
+Set **scenario** to `checkout-payment-diagnostic` to validate the shipping-address form and advance through the `Saves user info for checkout` control. It captures `android-payment-page-source.xml` before any payment fields or final-order steps are automated.
