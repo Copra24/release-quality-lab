@@ -34,6 +34,7 @@ async function run() {
     platformName: 'Android',
     'appium:automationName': 'UiAutomator2',
     'appium:deviceName': process.env.ANDROID_DEVICE_NAME ?? 'Android Emulator',
+    ...(process.env.ANDROID_PLATFORM_VERSION ? { 'appium:platformVersion': process.env.ANDROID_PLATFORM_VERSION } : {}),
     'appium:app': isSauce ? process.env.SAUCE_APP : undefined,
     'appium:newCommandTimeout': 120,
     ...(process.env.ANDROID_APP_PACKAGE ? { 'appium:appPackage': process.env.ANDROID_APP_PACKAGE } : {}),

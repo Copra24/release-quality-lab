@@ -22,7 +22,7 @@ In GitHub: **Settings -> Secrets and variables -> Actions**, add these repositor
 
 Do not commit these values or paste the access key into chat.
 
-Optionally set repository variables `ANDROID_APP_PACKAGE`, `ANDROID_APP_ACTIVITY`, `SMOKE_ACCESSIBILITY_ID`, and `ANDROID_DEVICE_NAME`. The workflow defaults to `Google Pixel 8 GoogleAPI Emulator`.
+Optionally set repository variables `ANDROID_APP_PACKAGE`, `ANDROID_APP_ACTIVITY`, `SMOKE_ACCESSIBILITY_ID`, `ANDROID_DEVICE_NAME`, and `ANDROID_PLATFORM_VERSION`. The workflow defaults to the trial-verified `Samsung Galaxy S23 FE` on Android `16`.
 
 ## 3. Run it
 
