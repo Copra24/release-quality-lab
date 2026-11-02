@@ -1,5 +1,7 @@
 # Release Quality Engineering Lab
 
+[![Quality Checks](https://github.com/Copra24/release-quality-lab/actions/workflows/quality.yml/badge.svg)](https://github.com/Copra24/release-quality-lab/actions/workflows/quality.yml)
+
 An independent QA engineering portfolio project by Clifford Folefac. It demonstrates a practical quality approach across UI, API, test data, CI, and Android automation setup. This is portfolio work, not client or employer work.
 
 ## What this repository demonstrates
