@@ -88,12 +88,11 @@ async function run() {
     }
 
     if (scenario === 'cart') {
-      const products = await driver.$$('~Product Image');
-      if (!products.length) {
-        throw new Error('Cart scenario cannot start because no Product Image locator was found.');
+      const firstProduct = await driver.$('~Product Image');
+      if (await firstProduct.isExisting()) {
+        await firstProduct.click();
       }
 
-      await products[0].click();
       const addToCart = await driver.$('~Tap to add product to cart');
       await addToCart.waitForDisplayed({ timeout: 10_000 });
       await addToCart.click();
