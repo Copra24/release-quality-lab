@@ -1,6 +1,6 @@
 # Android Appium Smoke Module
 
-This module is intentionally configuration-driven so it can run against a legal demo app or a local Android build. It is not marked as executed until an emulator/device run is recorded in the repository.
+This module is intentionally configuration-driven so it can run against a legal demo app or a local Android build. It was executed against the My Demo App on a Sauce Labs Samsung Galaxy S23 FE running Android 16. See the sanitized [execution evidence](../docs/execution-evidence/2026-11-02-sauce-labs-android-smoke.md).
 
 ## Prerequisites
 

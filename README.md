@@ -13,7 +13,7 @@ An independent QA engineering portfolio project by Clifford Folefac. It demonstr
 | API testing | Playwright API checks, OpenAPI contract, and a Postman collection |
 | Test data | SQL fixture and isolated in-memory demo data |
 | CI | GitHub Actions workflow running the Playwright suite on every pull request |
-| Mobile automation | Configurable Appium + UiAutomator2 Android smoke module |
+| Mobile automation | Appium + UiAutomator2 Android smoke test executed on Sauce Labs |
 | AI-assisted QA | Documented, review-gated workflow for accelerating test drafting and maintenance |
 
 ## Test strategy
@@ -71,12 +71,8 @@ See [`docs/bug-reports/BUG-001-empty-task-feedback.md`](docs/bug-reports/BUG-001
 
 ## Android Appium module
 
-The Appium module is setup-ready but should only be described as **executed** after it runs against an emulator or device. Setup instructions are in [`appium/README.md`](appium/README.md).
+The Appium module was executed successfully on a Sauce Labs Samsung Galaxy S23 FE running Android 16. The smoke check launched the My Demo App and verified that `Sauce Labs Backpack` was visible. See the sanitized [execution evidence](docs/execution-evidence/2026-11-02-sauce-labs-android-smoke.md). Setup instructions are in [`appium/README.md`](appium/README.md).
 
 For a cloud-device run without Android Studio, see [`docs/sauce-labs-setup.md`](docs/sauce-labs-setup.md). The Sauce workflow is manual and uses GitHub secrets, so credentials are not committed or exposed in CI logs.
-
-## Suggested next evidence
-
-After the first GitHub Actions run succeeds, add a screenshot of the workflow result to a GitHub issue or release note. After an Android run succeeds, add the command, device details, and a sanitized execution result. This keeps the portfolio honest and useful in interviews.
 
 For an inspectable mapping of every claimed capability to an artifact, see [`docs/skills-evidence.md`](docs/skills-evidence.md).
