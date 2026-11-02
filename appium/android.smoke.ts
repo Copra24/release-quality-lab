@@ -9,7 +9,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 async function run() {
   const isSauce = process.env.MOBILE_GRID === 'sauce';
   const scenario = process.env.MOBILE_TEST_SCENARIO ?? 'launch';
-  if (!['launch', 'cart'].includes(scenario)) {
+  if (!['launch', 'cart', 'checkout-diagnostic'].includes(scenario)) {
     throw new Error(`Unsupported MOBILE_TEST_SCENARIO: ${scenario}`);
   }
   const required = [
@@ -87,7 +87,7 @@ async function run() {
       console.log('Saved product detail page source to artifacts/android-product-detail-page-source.xml for locator design.');
     }
 
-    if (scenario === 'cart') {
+    if (['cart', 'checkout-diagnostic'].includes(scenario)) {
       const firstProduct = await driver.$('~Product Image');
       if (await firstProduct.isExisting()) {
         await firstProduct.click();
@@ -124,6 +124,17 @@ async function run() {
         writeFileSync('artifacts/android-cart-page-source.xml', cartSource);
       }
       console.log('Android cart scenario passed: product added and cart state verified.');
+
+      if (scenario === 'checkout-diagnostic') {
+        const proceedToCheckout = await driver.$('~Confirms products for checkout');
+        await proceedToCheckout.waitForDisplayed({ timeout: 10_000 });
+        await proceedToCheckout.click();
+        await driver.pause(500);
+        const checkoutSource = await driver.getPageSource();
+        mkdirSync('artifacts', { recursive: true });
+        writeFileSync('artifacts/android-checkout-page-source.xml', checkoutSource);
+        console.log('Saved checkout page source to artifacts/android-checkout-page-source.xml for locator design.');
+      }
     }
 
     if (process.env.SMOKE_ACCESSIBILITY_ID) {
