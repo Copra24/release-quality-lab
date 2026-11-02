@@ -8,6 +8,7 @@
     "test": "playwright test",
     "test:ui": "playwright test tests/ui",
     "test:api": "playwright test tests/api",
+    "test:a11y": "playwright test tests/accessibility --project=chromium",
     "test:report": "playwright show-report",
     "test:android": "tsx appium/android.smoke.ts",
     "validate:assets": "node scripts/validate-assets.js",
@@ -15,6 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
     "@playwright/test": "^1.58.2",
     "@types/node": "^24.0.0",
     "appium": "^3.2.0",

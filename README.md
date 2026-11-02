@@ -14,6 +14,7 @@ An independent QA engineering portfolio project by Clifford Folefac. It demonstr
 | Test data | SQL fixture and isolated in-memory demo data |
 | CI | GitHub Actions workflow running the Playwright suite on every pull request |
 | Mobile automation | Appium + UiAutomator2 Android smoke test executed on Sauce Labs |
+| Accessibility | Automated WCAG A/AA scan and keyboard-first release-task journey |
 | AI-assisted QA | Documented, review-gated workflow for accelerating test drafting and maintenance |
 
 ## Test strategy
@@ -40,8 +41,13 @@ Useful focused runs:
 ```bash
 npm run test:ui
 npm run test:api
+npm run test:a11y
 npm run test:report
 ```
+
+## Accessibility coverage
+
+The Playwright accessibility suite uses axe-core to scan the release taskboard against WCAG A and AA rules. It also verifies the keyboard-first task-entry journey and accessible form control names. Automated scans are a safety net, not a substitute for manual checks of keyboard order, screen-reader announcements, zoom and reflow, and meaningful user journeys.
 
 ## API assets
 
