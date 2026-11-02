@@ -30,4 +30,4 @@ Open **Actions -> Sauce Labs Android Smoke -> Run workflow**, select the Sauce r
 
 The smoke check validates that `Sauce Labs Backpack` is visible after launch. If you set `SMOKE_ACCESSIBILITY_ID`, it also verifies that specific control. Keep the run URL, device details, screenshots, and video as evidence. Only change the README or CV to say the Appium module is executed after this run passes.
 
-The workflow requests Sauce Labs Appium `2.11.0`, because Android 14 and later require the W3C protocol with Appium 2.
+The workflow requests Sauce Labs `appium2-2025-09`, a currently supported Appium 2 release, because Android 14 and later require the W3C protocol with Appium 2.
