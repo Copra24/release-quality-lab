@@ -24,7 +24,7 @@ on:
         required: true
         default: launch
         type: choice
-        options: [launch, cart, checkout-diagnostic, checkout-login-diagnostic, checkout-payment-diagnostic, checkout-shipping-diagnostic]
+        options: [launch, cart, checkout-diagnostic, checkout-login-diagnostic, checkout-payment-diagnostic, checkout-shipping-diagnostic, checkout-review-diagnostic]
 
 jobs:
   android-smoke:
