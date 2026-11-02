@@ -87,6 +87,8 @@ These artifacts show the decisions that sit around automated checks: risk select
 
 The API performance smoke sends a small concurrent workload to `POST /api/tasks`, requires successful `201` responses, and enforces a p95 latency threshold. It publishes a JSON summary as a GitHub Actions artifact. Read the [scope and limitations](docs/performance-baseline.md) before interpreting it as a production performance result.
 
+The [latest recorded Quality Checks execution](docs/execution-evidence/2026-11-02-quality-checks.md) passed both the Playwright and API performance jobs.
+
 ## Android Appium module
 
 The Appium module was executed successfully on a Sauce Labs Samsung Galaxy S23 FE running Android 16. The smoke check launched the My Demo App and verified that `Sauce Labs Backpack` was visible. See the sanitized [execution evidence](docs/execution-evidence/2026-11-02-sauce-labs-android-smoke.md). Setup instructions are in [`appium/README.md`](appium/README.md).
