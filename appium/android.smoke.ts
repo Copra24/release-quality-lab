@@ -103,8 +103,20 @@ async function run() {
       await driver.pause(500);
 
       const cartSource = await driver.getPageSource();
-      if (!cartSource.includes('Sauce Labs Backpack') || cartSource.includes('Tap to add product to cart')) {
-        throw new Error('Cart scenario did not show the added product in a cart state.');
+      const cartTitle = await driver.$('id=com.saucelabs.mydemoapp.android:id/productTV');
+      const cartCount = await driver.$('id=com.saucelabs.mydemoapp.android:id/cartTV');
+      const productTitle = await driver.$('id=com.saucelabs.mydemoapp.android:id/titleTV');
+      const removeItem = await driver.$('~Removes product from cart');
+
+      await cartTitle.waitForDisplayed({ timeout: 10_000 });
+      await removeItem.waitForDisplayed({ timeout: 10_000 });
+      const [title, count, addedProduct] = await Promise.all([
+        cartTitle.getText(),
+        cartCount.getText(),
+        productTitle.getText()
+      ]);
+      if (title !== 'My Cart' || count !== '1' || addedProduct !== 'Sauce Labs Backpack') {
+        throw new Error(`Cart scenario did not show the expected state. title=${title}, count=${count}, product=${addedProduct}`);
       }
 
       if (process.env.MOBILE_CAPTURE_PAGE_SOURCE === 'true') {

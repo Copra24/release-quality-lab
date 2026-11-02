@@ -24,4 +24,4 @@ For a cloud-device diagnostic run, set **capture page source** to `true` when ma
 
 ## Native cart scenario
 
-Set the workflow **scenario** to `cart` to execute a real Android journey: open the first catalog product when needed, add it to the cart using the `Tap to add product to cart` accessibility label, open the cart with `View cart`, and verify the product remains present outside the detail-page state. The scenario also works when a diagnostic run has already opened a product-detail screen. When page-source capture is enabled, the cart source is saved as an artifact too.
+Set the workflow **scenario** to `cart` to execute a real Android journey: open the first catalog product when needed, add it to the cart using the `Tap to add product to cart` accessibility label, open the cart with `View cart`, and verify the `My Cart` title, cart count, selected product, and `Remove Item` control through confirmed native resource IDs and accessibility labels. The scenario also works when a diagnostic run has already opened a product-detail screen. When page-source capture is enabled, the cart source is saved as an artifact too.
