@@ -16,7 +16,7 @@ test.describe('Release taskboard', () => {
 
   test('keeps the user informed when an invalid task is submitted', async ({ page }) => {
     await page.goto('/');
-    await page.locator('[data-testid="task-form"]').evaluate((form) => form.noValidate = true);
+    await page.locator('[data-testid="task-form"]').evaluate((form) => (form as HTMLFormElement).noValidate = true);
     await page.getByRole('button', { name: 'Add task' }).click();
     await expect(page.getByTestId('error-message')).toHaveText('A task title is required.');
   });
