@@ -1,0 +1,25 @@
+{
+  "name": "qa-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Independent QA portfolio: Playwright UI/API tests, OpenAPI, Postman, SQL test data, and Appium Android smoke coverage.",
+  "scripts": {
+    "start:demo": "node demo-app/server.js",
+    "test": "playwright test",
+    "test:ui": "playwright test tests/ui",
+    "test:api": "playwright test tests/api",
+    "test:report": "playwright show-report",
+    "test:android": "tsx appium/android.smoke.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^24.0.0",
+    "appium": "^3.2.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "webdriverio": "^9.20.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
