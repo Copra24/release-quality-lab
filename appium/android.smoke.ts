@@ -201,6 +201,7 @@ async function run() {
               await reviewOrder.click();
               await driver.pause(500);
               const reviewSource = await driver.getPageSource();
+              writeFileSync('artifacts/android-order-review-page-source.xml', reviewSource);
               if (reviewSource.includes('Enter a payment method')) {
                 const errorMessages = await Promise.all([
                   'nameErrorTV',
@@ -214,7 +215,6 @@ async function run() {
                 console.log(`Payment validation feedback: ${errorMessages.filter(Boolean).join(' | ') || 'none exposed'}`);
                 throw new Error('Payment submission did not advance to order review.');
               }
-              writeFileSync('artifacts/android-order-review-page-source.xml', reviewSource);
               console.log('Saved order review page source to artifacts/android-order-review-page-source.xml for locator design.');
             }
           }
