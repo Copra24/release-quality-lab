@@ -20,4 +20,4 @@ The smoke check starts the app and confirms that the specified accessibility-lab
 
 ## Designing stable mobile locators
 
-For a cloud-device diagnostic run, set **capture page source** to `true` when manually triggering the Sauce Labs workflow. The run stores `android-page-source.xml` as a 14-day GitHub Actions artifact. Use that captured source to identify stable Android resource IDs or accessibility labels before adding a native user journey. Do not guess selectors from visual button text when a stable identifier is available.
+For a cloud-device diagnostic run, set **capture page source** to `true` when manually triggering the Sauce Labs workflow. The run stores `android-page-source.xml` as a 14-day GitHub Actions artifact. Set **diagnostic open first product** to `true` as well to capture `android-product-detail-page-source.xml`. Use these artifacts to identify stable Android resource IDs or accessibility labels before adding a native user journey. Do not guess selectors from visual button text when a stable identifier is available.

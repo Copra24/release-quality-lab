@@ -14,6 +14,11 @@ on:
         required: true
         default: false
         type: boolean
+      diagnostic_open_first_product:
+        description: Open the first catalog product and save its page source for native-flow locator design
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   android-smoke:
@@ -34,6 +39,7 @@ jobs:
       ANDROID_DEVICE_NAME: ${{ vars.ANDROID_DEVICE_NAME || 'Samsung Galaxy S23 FE' }}
       ANDROID_PLATFORM_VERSION: ${{ vars.ANDROID_PLATFORM_VERSION || '16' }}
       MOBILE_CAPTURE_PAGE_SOURCE: ${{ inputs.capture_page_source }}
+      MOBILE_DIAGNOSTIC_OPEN_FIRST_PRODUCT: ${{ inputs.diagnostic_open_first_product }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -46,5 +52,5 @@ jobs:
         if: ${{ inputs.capture_page_source }}
         with:
           name: android-page-source
-          path: artifacts/android-page-source.xml
+          path: artifacts/*.xml
           retention-days: 14

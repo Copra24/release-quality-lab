@@ -70,6 +70,19 @@ async function run() {
       console.log('Saved Android page source to artifacts/android-page-source.xml for locator design.');
     }
 
+    if (process.env.MOBILE_DIAGNOSTIC_OPEN_FIRST_PRODUCT === 'true') {
+      const products = await driver.$$('~Product Image');
+      if (!products.length) {
+        throw new Error('Cannot capture product detail page because no Product Image locator was found.');
+      }
+      await products[0].click();
+      await driver.pause(500);
+      const detailSource = await driver.getPageSource();
+      mkdirSync('artifacts', { recursive: true });
+      writeFileSync('artifacts/android-product-detail-page-source.xml', detailSource);
+      console.log('Saved product detail page source to artifacts/android-product-detail-page-source.xml for locator design.');
+    }
+
     if (process.env.SMOKE_ACCESSIBILITY_ID) {
       const target = await driver.$(`~${process.env.SMOKE_ACCESSIBILITY_ID}`);
       await target.waitForDisplayed({ timeout: 10_000 });
