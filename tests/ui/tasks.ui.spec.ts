@@ -8,7 +8,7 @@ test.describe('Release taskboard', () => {
     await page.getByTestId('new-task-input').fill('Run mobile smoke suite');
     await page.getByRole('button', { name: 'Add task' }).click();
 
-    const task = page.getByTestId(/task-/).filter({ hasText: 'Run mobile smoke suite' });
+    const task = page.locator('li[data-testid^="task-"]').filter({ hasText: 'Run mobile smoke suite' });
     await expect(task).toBeVisible();
     await task.getByRole('checkbox', { name: 'Mark Run mobile smoke suite complete' }).check();
     await expect(task.locator('span')).toHaveClass('completed');
