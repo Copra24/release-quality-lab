@@ -22,6 +22,16 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] }
     },
     {
+      name: 'firefox',
+      testMatch: /tests\/(ui|accessibility)\/.*\.spec\.ts/,
+      use: { browserName: 'firefox' }
+    },
+    {
+      name: 'webkit',
+      testMatch: /tests\/(ui|accessibility)\/.*\.spec\.ts/,
+      use: { browserName: 'webkit' }
+    },
+    {
       name: 'mobile-chrome',
       testMatch: /tests\/mobile\/.*\.spec\.ts/,
       use: { ...devices['Pixel 5'] }

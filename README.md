@@ -9,6 +9,7 @@ An independent QA engineering portfolio project by Clifford Folefac. It demonstr
 | Area | Evidence in this repository |
 | --- | --- |
 | UI automation | Playwright + TypeScript tests covering task creation and completion |
+| Cross-browser web QA | Chromium, Firefox, and WebKit projects for UI and accessibility regression coverage |
 | Mobile web QA | Playwright Pixel 5 emulation with a touch-based release-task journey |
 | API testing | Playwright API checks, OpenAPI contract, and a Postman collection |
 | Test data | SQL fixture and isolated in-memory demo data |
@@ -27,13 +28,13 @@ The sample system is a release taskboard with a small web UI and REST API. Cover
 3. **Test data** remains independent of production data. `sql/test-data.sql` documents a repeatable fixture and data assertion.
 4. **Mobile** is kept as a separate smoke layer because it needs a real emulator or device to be meaningful.
 
-The repository also runs a mobile-Chrome emulation project using Playwright's Pixel 5 device profile. This is browser-responsive and touch-interaction coverage. It is not presented as native Android or Appium execution.
+The repository runs UI and accessibility coverage on Chromium, Firefox, and WebKit. API checks run on Chromium because they exercise the service directly rather than browser rendering. It also runs a mobile-Chrome emulation project using Playwright's Pixel 5 device profile. This is browser-responsive and touch-interaction coverage. It is not presented as native Android or Appium execution.
 
 ## Run locally
 
 ```bash
 npm install
-npx playwright install chromium
+npx playwright install chromium firefox webkit
 npm test
 ```
 
