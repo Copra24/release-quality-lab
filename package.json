@@ -11,7 +11,8 @@
     "test:report": "playwright show-report",
     "test:android": "tsx appium/android.smoke.ts",
     "validate:assets": "node scripts/validate-assets.js",
-    "audit:runtime": "npm audit --omit=dev"
+    "audit:runtime": "npm audit --omit=dev",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
