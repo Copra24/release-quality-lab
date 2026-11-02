@@ -5,6 +5,7 @@ This matrix makes the portfolio easy for a recruiter or hiring manager to inspec
 | Capability | Evidence | Status |
 | --- | --- | --- |
 | Playwright + TypeScript UI automation | `tests/ui/tasks.ui.spec.ts` | Implemented; run after dependencies are installed |
+| Mobile web QA | `tests/mobile/tasks.mobile.spec.ts` using Playwright Pixel 5 emulation and touch interaction | Implemented; CI-run once pushed |
 | Playwright API testing | `tests/api/tasks.api.spec.ts` | Implemented; run after dependencies are installed |
 | Test framework configuration | `playwright.config.ts` with retries, traces, screenshots, video, HTML report, and local web server | Implemented |
 | CI/CD | `.github/workflows/quality.yml` | Implemented; runs when pushed to GitHub |
