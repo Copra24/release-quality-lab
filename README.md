@@ -73,6 +73,8 @@ See [`docs/bug-reports/BUG-001-empty-task-feedback.md`](docs/bug-reports/BUG-001
 
 The Appium module is setup-ready but should only be described as **executed** after it runs against an emulator or device. Setup instructions are in [`appium/README.md`](appium/README.md).
 
+For a cloud-device run without Android Studio, see [`docs/sauce-labs-setup.md`](docs/sauce-labs-setup.md). The Sauce workflow is manual and uses GitHub secrets, so credentials are not committed or exposed in CI logs.
+
 ## Suggested next evidence
 
 After the first GitHub Actions run succeeds, add a screenshot of the workflow result to a GitHub issue or release note. After an Android run succeeds, add the command, device details, and a sanitized execution result. This keeps the portfolio honest and useful in interviews.

@@ -1,0 +1,36 @@
+name: Sauce Labs Android Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      sauce_region:
+        description: Sauce Labs region used when the account was created
+        required: true
+        default: us-west-1
+        type: choice
+        options: [us-west-1, eu-central-1]
+
+jobs:
+  android-smoke:
+    name: Appium Android smoke on Sauce Labs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: sauce-labs
+    env:
+      MOBILE_GRID: sauce
+      SAUCE_REGION: ${{ inputs.sauce_region }}
+      SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+      SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+      SAUCE_APP: ${{ secrets.SAUCE_APP }}
+      ANDROID_APP_PACKAGE: ${{ secrets.ANDROID_APP_PACKAGE }}
+      ANDROID_APP_ACTIVITY: ${{ secrets.ANDROID_APP_ACTIVITY }}
+      SMOKE_ACCESSIBILITY_ID: ${{ secrets.SMOKE_ACCESSIBILITY_ID }}
+      ANDROID_DEVICE_NAME: ${{ vars.ANDROID_DEVICE_NAME || 'Google Pixel 8 GoogleAPI Emulator' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test:android
