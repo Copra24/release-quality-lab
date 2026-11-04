@@ -14,7 +14,10 @@ test.describe('Release taskboard on mobile Chrome', () => {
 
     const task = page.locator('li[data-testid^="task-"]').filter({ hasText: taskTitle });
     await expect(task).toBeVisible();
-    await task.getByRole('checkbox', { name: `Mark ${taskTitle} complete` }).tap();
+    const completionControl = task.getByRole('checkbox', { name: `Mark ${taskTitle} complete` });
+    // `tap()` can calculate an unstable touch point inside a long mobile list.
+    // `check()` retains the native checkbox semantics and waits for the state change.
+    await completionControl.check();
     await expect(task.locator('span')).toHaveClass('completed');
   });
 });
