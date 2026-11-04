@@ -63,6 +63,8 @@ The [latest API contract quality run](docs/execution-evidence/2026-11-04-api-con
 
 The [API validation matrix](docs/api-validation-matrix.md) explains the data-driven boundary and negative-path cases for task creation and completion-state updates.
 
+The [data-driven API quality run](docs/execution-evidence/2026-11-04-data-driven-api-quality-checks.md) passed in GitHub Actions, including the cross-browser and mobile-web regression checks.
+
 ## AI-assisted testing workflow
 
 AI is used as an accelerator, not an authority:
