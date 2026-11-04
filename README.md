@@ -65,6 +65,10 @@ The [API validation matrix](docs/api-validation-matrix.md) explains the data-dri
 
 The [data-driven API quality run](docs/execution-evidence/2026-11-04-data-driven-api-quality-checks.md) passed in GitHub Actions, including the cross-browser and mobile-web regression checks.
 
+## Release-quality reporting
+
+After each Playwright CI run, the workflow generates a Markdown release-quality summary from the machine-readable test results and retains it with the HTML report as a GitHub Actions artifact. It reports project-level counts, test duration, flaky and skipped counts, covered signals, residual risks, and a scope-limited GO/NO-GO recommendation. The separate performance and manually triggered Android workflows retain their own artifacts and must be reviewed alongside this summary when they are in scope.
+
 ## AI-assisted testing workflow
 
 AI is used as an accelerator, not an authority:

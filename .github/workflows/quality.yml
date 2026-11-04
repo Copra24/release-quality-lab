@@ -24,11 +24,16 @@ jobs:
       - run: npm run validate:openapi
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm test
+      - run: npm run generate:release-report
+        if: ${{ always() }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report
-          path: playwright-report/
+          name: release-quality-evidence
+          path: |
+            playwright-report/
+            artifacts/playwright-results.json
+            artifacts/release-quality-summary.md
           retention-days: 14
 
   api-performance-smoke:

@@ -9,6 +9,7 @@
     "test:ui": "playwright test tests/ui",
     "test:api": "playwright test tests/api",
     "validate:openapi": "node scripts/validate-openapi.js",
+    "generate:release-report": "node scripts/generate-release-report.js",
     "test:a11y": "playwright test tests/accessibility --project=chromium",
     "test:performance": "node scripts/performance-smoke.js",
     "test:report": "playwright show-report",
