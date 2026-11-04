@@ -6,6 +6,9 @@ const baseURL = process.env.BASE_URL ?? `http://127.0.0.1:${port}`;
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
+  // The demo API stores tasks in memory. CI uses one worker so browser and API
+  // projects do not mutate the same ephemeral fixture concurrently.
+  workers: process.env.CI ? 1 : undefined,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   reporter: [['html', { open: 'never' }], ['list']],

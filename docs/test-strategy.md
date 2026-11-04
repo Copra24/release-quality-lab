@@ -22,6 +22,10 @@ This strategy covers the release taskboard demo application, its REST API, brows
 - **UI end-to-end:** high-risk browser workflows with user-visible assertions and stable locators.
 - **Mobile web:** responsive browser interaction through Playwright's Pixel 5 profile. This is distinct from native mobile automation.
 - **Native Android smoke:** cloud-device app launch and a visible product-content assertion using Appium, UiAutomator2, and Sauce Labs.
+
+## Test-data isolation
+
+The demo API intentionally uses an in-memory task collection. GitHub Actions therefore runs the browser and API suite with one Playwright worker, preventing concurrent tests from mutating the same ephemeral fixture. New tasks are inserted at the top of the release board so the user's newly created work remains immediately visible on a small screen. A production system would normally use isolated tenant, database, or API-fixture data instead of serial execution.
 - **Accessibility:** automated WCAG A/AA rule scanning plus a keyboard-first task-entry flow. Manual checks remain required for screen readers, focus order, zoom/reflow, and content meaning.
 
 ## Entry criteria

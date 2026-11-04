@@ -42,7 +42,10 @@ const server = http.createServer(async (request, response) => {
       return sendJson(response, 400, { error: `title must be ${maxTaskTitleLength} characters or fewer` });
     }
     const task = { id: nextId++, title, completed: false };
-    tasks.push(task);
+    // New release work should be immediately visible. This also prevents a
+    // growing shared test fixture from pushing the newly created task off the
+    // mobile viewport during parallel quality checks.
+    tasks.unshift(task);
     return sendJson(response, 201, { task });
   }
 
