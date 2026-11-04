@@ -94,6 +94,7 @@ components:
         title:
           type: string
           minLength: 1
+          maxLength: 120
         completed:
           type: boolean
     CreateTaskRequest:
@@ -104,6 +105,7 @@ components:
         title:
           type: string
           minLength: 1
+          maxLength: 120
     UpdateTaskRequest:
       type: object
       required: [completed]

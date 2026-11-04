@@ -61,6 +61,8 @@ The OpenAPI document is validated in CI. API tests check list and task response 
 
 The [latest API contract quality run](docs/execution-evidence/2026-11-04-api-contract-quality-checks.md) passed in GitHub Actions.
 
+The [API validation matrix](docs/api-validation-matrix.md) explains the data-driven boundary and negative-path cases for task creation and completion-state updates.
+
 ## AI-assisted testing workflow
 
 AI is used as an accelerator, not an authority:

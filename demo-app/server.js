@@ -3,6 +3,7 @@ const { readFile } = require('node:fs/promises');
 const { join } = require('node:path');
 
 const port = Number(process.env.PORT || 4173);
+const maxTaskTitleLength = 120;
 let nextId = 3;
 let tasks = [
   { id: 1, title: 'Review acceptance criteria', completed: false },
@@ -36,7 +37,11 @@ const server = http.createServer(async (request, response) => {
     if (!body.title || typeof body.title !== 'string' || !body.title.trim()) {
       return sendJson(response, 400, { error: 'title is required' });
     }
-    const task = { id: nextId++, title: body.title.trim(), completed: false };
+    const title = body.title.trim();
+    if (title.length > maxTaskTitleLength) {
+      return sendJson(response, 400, { error: `title must be ${maxTaskTitleLength} characters or fewer` });
+    }
+    const task = { id: nextId++, title, completed: false };
     tasks.push(task);
     return sendJson(response, 201, { task });
   }

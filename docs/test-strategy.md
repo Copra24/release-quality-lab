@@ -10,6 +10,7 @@ This strategy covers the release taskboard demo application, its REST API, brows
 | --- | --- | --- | --- |
 | A release task is created with incorrect or missing data | Release readiness can be misrepresented | API positive and negative tests, UI validation | `tests/api/tasks.api.spec.ts`, `tests/ui/tasks.ui.spec.ts` |
 | A task completion state is lost or changed incorrectly | Teams may act on inaccurate release status | API state-transition test, UI completion journey | `tests/api/tasks.api.spec.ts`, `tests/ui/tasks.ui.spec.ts` |
+| API accepts invalid or boundary-breaking values | Invalid release data can create misleading work items or corrupt state | OpenAPI constraints plus data-driven API boundary and type-validation checks | `tests/api/tasks.validation.spec.ts`, `docs/api-validation-matrix.md` |
 | Critical user journey fails on a small touch screen | Mobile users cannot complete release work | Pixel 5 touch-based browser test | `tests/mobile/tasks.mobile.spec.ts` |
 | The native application cannot start on a supported device | Mobile release is unusable at launch | Appium Android smoke check on Sauce Labs | `appium/android.smoke.ts`, `docs/execution-evidence/` |
 | Assistive-technology users cannot access task entry | Product is inaccessible or non-compliant | axe WCAG A/AA scan and keyboard-first check, followed by manual validation | `tests/accessibility/taskboard.a11y.spec.ts` |
