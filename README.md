@@ -59,6 +59,8 @@ The Playwright accessibility suite uses axe-core to scan the release taskboard a
 
 The OpenAPI document is validated in CI. API tests check list and task response shapes, successful create-update-delete behaviour, invalid request payloads, invalid state-transition types, and stable `404` error responses for unknown task IDs. This is contract-aligned functional coverage for the demo API, not a claim of enterprise-wide consumer-driven contract testing.
 
+The [latest API contract quality run](docs/execution-evidence/2026-11-04-api-contract-quality-checks.md) passed in GitHub Actions.
+
 ## AI-assisted testing workflow
 
 AI is used as an accelerator, not an authority:
