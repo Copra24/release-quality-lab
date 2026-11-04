@@ -1,48 +1,137 @@
 openapi: 3.0.3
 info:
   title: Release Taskboard API
-  version: 1.0.0
-  description: Independent portfolio API used to demonstrate functional and API quality coverage.
+  version: 1.1.0
+  description: Independent portfolio API used to demonstrate functional, negative-path, and contract-aligned quality coverage.
 paths:
   /api/tasks:
     get:
-      summary: List tasks
+      summary: List release tasks
       responses:
         '200':
           description: Task list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskListResponse'
     post:
-      summary: Create a task
+      summary: Create a release task
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required: [title]
-              properties:
-                title:
-                  type: string
-                  minLength: 1
+              $ref: '#/components/schemas/CreateTaskRequest'
       responses:
-        '201': { description: Created }
-        '400': { description: Invalid payload }
+        '201':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
   /api/tasks/{id}:
+    parameters:
+      - $ref: '#/components/parameters/TaskId'
     patch:
-      summary: Update task completion state
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema: { type: integer }
+      summary: Update a task completion state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
       responses:
-        '200': { description: Updated }
-        '404': { description: Not found }
+        '200':
+          description: Task updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
     delete:
       summary: Delete a task
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema: { type: integer }
       responses:
-        '204': { description: Deleted }
+        '204':
+          description: Task deleted
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  parameters:
+    TaskId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    ValidationError:
+      description: Invalid request payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFoundError:
+      description: Requested task was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    Task:
+      type: object
+      required: [id, title, completed]
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+          minLength: 1
+        completed:
+          type: boolean
+    CreateTaskRequest:
+      type: object
+      required: [title]
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+          minLength: 1
+    UpdateTaskRequest:
+      type: object
+      required: [completed]
+      additionalProperties: false
+      properties:
+        completed:
+          type: boolean
+    TaskResponse:
+      type: object
+      required: [task]
+      additionalProperties: false
+      properties:
+        task:
+          $ref: '#/components/schemas/Task'
+    TaskListResponse:
+      type: object
+      required: [tasks]
+      additionalProperties: false
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+    ErrorResponse:
+      type: object
+      required: [error]
+      additionalProperties: false
+      properties:
+        error:
+          type: string
+          minLength: 1

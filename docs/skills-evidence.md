@@ -10,7 +10,7 @@ This matrix makes the portfolio easy for a recruiter or hiring manager to inspec
 | Playwright API testing | `tests/api/tasks.api.spec.ts` | Implemented; run after dependencies are installed |
 | Test framework configuration | `playwright.config.ts` with retries, traces, screenshots, video, HTML report, and local web server | Implemented |
 | CI/CD | `.github/workflows/quality.yml` | Implemented; runs when pushed to GitHub |
-| REST API contract | `openapi/taskboard.openapi.yaml` | Implemented |
+| REST API contract and negative paths | `openapi/taskboard.openapi.yaml`, `scripts/validate-openapi.js`, and `tests/api/tasks.api.spec.ts` | OpenAPI document validated in CI; response shapes, request validation, type errors, and not-found cases covered |
 | Postman API checks | `postman/Taskboard.postman_collection.json` | Implemented |
 | SQL test data | `sql/test-data.sql` | Implemented |
 | Defect reporting | `docs/bug-reports/BUG-001-empty-task-feedback.md` | Implemented example |

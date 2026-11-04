@@ -15,6 +15,16 @@
       "name": "Reject empty title",
       "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"\"\n}" }, "url": "{{baseUrl}}/api/tasks" },
       "event": [{ "listen": "test", "script": { "exec": ["pm.test('rejects invalid payload', () => pm.response.to.have.status(400));", "pm.expect(pm.response.json().error).to.eql('title is required');"] } }]
+    },
+    {
+      "name": "Reject invalid completion type",
+      "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"completed\": \"true\"\n}" }, "url": "{{baseUrl}}/api/tasks/1" },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('rejects invalid completion type', () => pm.response.to.have.status(400));", "pm.expect(pm.response.json().error).to.eql('completed must be boolean');"] } }]
+    },
+    {
+      "name": "Unknown task returns contract error",
+      "request": { "method": "DELETE", "url": "{{baseUrl}}/api/tasks/999999" },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('returns not found', () => pm.response.to.have.status(404));", "pm.expect(pm.response.json()).to.eql({ error: 'task not found' });"] } }]
     }
   ]
 }

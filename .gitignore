@@ -5,3 +5,4 @@ test-results/
 allure-results/
 mobile-artifact-inspection*/
 artifacts/
+.npm-cache/

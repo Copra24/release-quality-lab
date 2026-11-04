@@ -11,7 +11,7 @@ An independent QA engineering portfolio project by Clifford Folefac. It demonstr
 | UI automation | Playwright + TypeScript tests covering task creation and completion |
 | Cross-browser web QA | Chromium, Firefox, and WebKit projects for UI and accessibility regression coverage |
 | Mobile web QA | Playwright Pixel 5 emulation with a touch-based release-task journey |
-| API testing | Playwright API checks, OpenAPI contract, and a Postman collection |
+| API testing | Playwright API checks, schema-complete OpenAPI contract validation, negative paths, and a Postman collection |
 | Test data | SQL fixture and isolated in-memory demo data |
 | CI | GitHub Actions workflow running the Playwright suite on every pull request |
 | Mobile automation | Appium + UiAutomator2 Android smoke test executed on Sauce Labs |
@@ -56,6 +56,8 @@ The Playwright accessibility suite uses axe-core to scan the release taskboard a
 - Contract: [`openapi/taskboard.openapi.yaml`](openapi/taskboard.openapi.yaml)
 - Postman collection: [`postman/Taskboard.postman_collection.json`](postman/Taskboard.postman_collection.json)
 - SQL test data: [`sql/test-data.sql`](sql/test-data.sql)
+
+The OpenAPI document is validated in CI. API tests check list and task response shapes, successful create-update-delete behaviour, invalid request payloads, invalid state-transition types, and stable `404` error responses for unknown task IDs. This is contract-aligned functional coverage for the demo API, not a claim of enterprise-wide consumer-driven contract testing.
 
 ## AI-assisted testing workflow
 
